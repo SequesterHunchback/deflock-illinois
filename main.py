@@ -475,7 +475,7 @@ def print_most_common(df) -> None:
         .value_counts()
         .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
         .sort(by="count")
-        .tail(50)
+        .tail(20)
     )
     print("Searches by month")
     print(
