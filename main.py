@@ -37,249 +37,16 @@ def main(
 
     if fresh:
         df = clean_log_dir(audits_source)
-
-        buckets = {
-            ".stolen": {
-                "606 e white theft suspect",
-                "atm theft",
-                "bpd ulta theft",
-                "ccso stolen",
-                "civil/theft/dus",
-                "larceny/theft offenses - suspect vehicle"
-                "larceny/theft offenses - suspect vehicle",
-                "larceny/theft offenses - suspect",
-                "larceny/theft offenses - theft",
-                "larceny/theft offenses",
-                "motor vehicle theft/stolen - ccso stolen veh",
-                "robbery",
-                "stolen ccso",
-                "stolen property offenses - poss stolen property",
-                "stolen property offenses - stolen veh",
-                "stolen property offenses - stolen",
-                "stolen property offenses",
-                "stolen",
-                "stolen?",
-                "theft suspect",
-                "theft",
-                "theftt",
-                "u of i stolen",
-                "urbana stolen",
-            },
-            ".vandalism": {
-                "destruction/damage/vandalism of property",
-            },
-            ".traffic-inf": {
-                "traffic infraction",
-                "traffic infraction - 2026-1253",
-            },
-            ".burglary": {
-                "36898 burg",
-                "95able for burglary",
-                "burg",
-                "burglary",
-                "burglary/breaking & entering - burlgary",
-                "burglary/breaking & entering",
-                "vcso burg suspect",
-                "vcso burgs",
-            },
-            ".homicide": {"homicide/death investigation", "homicide"},
-            ".assault/battery": {
-                "assault/battery offenses (domestic) - domestic",
-                "assault/battery offenses (domestic) - interview ro for domestic",
-                "assault/battery offenses (domestic) - stabbing",
-                "assault/battery offenses (domestic) - threats",
-                "assault/battery offenses (domestic)",
-                "assault/battery offenses - armed subject",
-                "assault/battery offenses - domestic cfs",
-                "assault/battery offenses - ro  95able",
-                "assault/battery offenses - ro arrestable",
-                "assault/battery offenses - stabbijg",
-                "assault/battery offenses - suspect",
-                "assault/battery offenses - wanted ro",
-                "assault/battery offenses - wanted subject",
-                "assault/battery offenses",
-                "battery",
-                "stabbing suspect",
-                "threats/harassment",
-                "wanted person (arrest warrant/fugitive) - agg batt to p/o",
-            },
-            ".wanted": {
-                "atl",
-                "warrant",
-                "wanted person (arrest warrant/fugitive) - ccso 99 for ro",
-                "wanted person (arrest warrant/fugitive) - persons wanted",
-                "wanted person (arrest warrant/fugitive) - wanted",
-                "wanted person (arrest warrant/fugitive)",
-                "wanted subject",
-                "wanted",
-            },
-            ".shooting": {
-                "assault/battery offenses - disorderly subject/battery",
-                "assault/battery offenses - shooting",
-                "assault/battery offenses - shooting investigation",
-                "assault/battery offenses - shots",
-                "domestic battery suspect",
-                "shooting suspect",
-                "shooting",
-                "shots fired",
-                "rantoul shooting",
-                "weapons offense (guns/shots fired) - armed subject",
-                "weapons offense (guns/shots fired) - armed subjects",
-                "weapons offense (guns/shots fired) - poss susp veh",
-                "weapons offense (guns/shots fired) - poss susp veh",
-                "weapons offense (guns/shots fired) - shooter car",
-                "weapons offense (guns/shots fired) - shooting in county jurisdiction",
-                "weapons offense (guns/shots fired) - shooting incident",
-                "weapons offense (guns/shots fired) - shooting investigation",
-                "weapons offense (guns/shots fired) - shooting suspect",
-                "weapons offense (guns/shots fired) - shooting",
-                "weapons offense (guns/shots fired) - shots fired",
-                "weapons offense (guns/shots fired) - shots",
-                "weapons offense (guns/shots fired) - suspect vehicle",
-                "weapons offense (guns/shots fired) - suspect veh",
-                "weapons offense (guns/shots fired) - urbana shooting",
-                "weapons offense (guns/shots fired) - unk vehicle blk suv",
-                "weapons offense (guns/shots fired) - wanted subject",
-                "weapons offense (guns/shots fired)",
-            },
-            ".sex crimes": {
-                "sex offenses - case followup",
-                "sex offenses",
-            },
-            ".hit/run": {
-                "hit and run",
-                "hit and run/car accident - 726 faust",
-                "hit and run/car accident - accident",
-                "hit and run/car accident - atl",
-                "hit and run/car accident - hit and run suspect",
-                "hit and run/car accident - hit and run",
-                "hit and run/car accident - hit run",
-                "hit and run/car accident - suspect vehicle",
-                "hit and run/car accident - suspect",
-                "hit and run/car accident",
-                "hit run",
-                "hit/run",
-                "other image search from alerts page associated with alert: hit and run",
-            },
-            ".vehicle theft": {
-                "hit and run/car accident - locate vehicle",
-                "hit and run/car accident - looking for suspect vehicle",
-                "hit and run/car accident - warrants",
-                "motor theft",
-                "motor vehicle theft/stolen - carjacking",
-                "motor vehicle theft/stolen - locate stolen vehicle 789",
-                "motor vehicle theft/stolen - stolen vehicle",
-                "motor vehicle theft/stolen - stolen vehicle cfs",
-                "motor vehicle theft/stolen - stolen",
-                "motor vehicle theft/stolen - theft",
-                "motor vehicle theft/stolen",
-                "mv theft",
-                "recovered stolen vehicle",
-                "stolen property offenses - case review",
-                "stolen property offenses - stolen vehicle",
-                "stolen veh",
-                "stolen vehicle",
-                "upd stolen veh",
-                "vehicle theft",
-            },
-            ".fled": {
-                "8298 flee",
-                "agg fleeing",
-                "criminal motor vehicle offense (incl. road rage/reckless) - agg fleeing - ccso",
-                "criminal motor vehicle offense (incl. road rage/reckless) - fleeing",
-                "fled from upd",
-                "fled upd",
-                "fled",
-                "flee and elude",
-                "flee",
-                "fleeing vehicle",
-                "fleeing",
-                "isp flee/elude",
-                "isp+flee/elude",
-                "obstructing the police (fleeing/eluding) - ccso pursuit",
-                "obstructing the police (fleeing/eluding) - flea",
-                "obstructing the police (fleeing/eluding) - fled from 728",
-                "obstructing the police (fleeing/eluding) - offender vehicle",
-                "obstructing the police (fleeing/eluding) - suspec",
-                "obstructing the police (fleeing/eluding) - wanted",
-                "obstructing the police (fleeing/eluding)",
-                "traffic infraction - fleeing",
-            },
-            ".assist other agency": {"assist other", "assist other agency"},
-            ".welfare check": {
-                "check welfare",
-                "welfare",
-                "welfare check",
-                "welfare check - check welfare",
-                "welfare check - missin person",
-                "welfare check - welfare",
-            },
-            ".shoplifting": {
-                "burglary/breaking & entering - retail theft",
-                "789 retail theft",
-                "larceny/theft offenses - retail theft",
-                "larceny/theft offenses - shoplifter",
-                "larceny/theft offenses - shoplifter not in custody",
-                "larceny/theft offenses - shoplifting suspect",
-                "lowes retail theft",
-                "retail theft / impound",
-                "retail theft at ulta",
-                "retail theft investigation",
-                "retail theft offender",
-                "retail theft suspect",
-                "retail theft",
-                "retain theft",
-                "shoplifeter",
-                "shoplifter at target",
-                "shoplifter not in custody",
-                "shoplifter",
-                "shoplifter/warrant",
-                "shoplifting",
-                "shopliter",
-
-            },
-            ".drugs": {
-                "drugs/narcotics",
-                "drugs/narcotics - case followup",
-                "drugs/narcotics - drugs",
-            },
-        }
-        case_no = r"(c|s|so|i|u)[0-9-]+"
-        df = df.with_columns(
-            polars.col("reason")
-            # Strip case nos. They will be saved in "case" column
-            .str.replace(case_no, "")
-            # Strip suspect's name
-            .str.replace("john.*", "")
-            # Strip trailing -
-            .str.replace(" - $", "")
-            # Strip trailing whitespace
-            .str.strip_chars()
-            # Bucket-ize reasons
-            .replace({
-                reason: group
-                for group, reasons in buckets.items()
-                for reason in [*reasons, group]
-            })
-            .alias("reason"),
-
-            # When case is missing, find it in reason
-            polars.when(polars.coalesce(polars.col("case"), polars.lit("")).len().gt(1))
-            .then(polars.col("case"))
-            .otherwise(
-                polars.when(polars.col("reason").str.contains(case_no))
-                .then(polars.col("reason").str.replace("(" + case_no + ")", r"\1"))
-                .otherwise(polars.lit(None))
-            )
-            .alias("case"),
-        )
-
+        df = persistent_preprocessing(df)
         df.write_parquet(consolidated)
     else:
         df = polars.read_parquet(consolidated)
 
+    df = non_persistent_preprocessing(df)
     print(f"{consolidated.name}: {len(df)} rows, {consolidated.stat().st_size} bytes")
-    print(df.schema)
+
+    for col, type in df.schema.items():
+        print(col, type)
 
     print_most_common(df)
     # sus_plates(df)
@@ -382,7 +149,6 @@ def altair_plot(
                 for reason in reasons
             ],
             polars.col("search_time").dt.round(every=period),
-            polars.col("case").is_not_null().alias("has_case"),
         )
         .group_by("search_time")
         .agg(
@@ -428,7 +194,7 @@ def altair_plot(
 def print_most_common(df) -> None:
     print("Reasons < 2026")
     print(
-        df.filter(polars.col("search_time") < polars.datetime(2026, 1, 1))
+        df.filter(polars.col("search_year") < 2026)
         ["reason"]
         .value_counts()
         .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
@@ -437,7 +203,7 @@ def print_most_common(df) -> None:
     )
     print("Reasons >= 2026")
     print(
-        df.filter(polars.col("search_time") >= polars.datetime(2026, 1, 1))
+        df.filter(polars.col("search_year") >= 2026)
         ["reason"]
         .value_counts()
         .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
@@ -486,12 +252,7 @@ def print_most_common(df) -> None:
     )
     print("Searches by month")
     print(
-        df.select(
-            polars.date(polars.col("search_time").dt.year(), polars.col("search_time").dt.month(), 1).alias("search_time"),
-            polars.col("case").is_not_null().alias("has_case"),
-            polars.col("reason").str.len_chars().gt(3).alias("has_reason"),
-        )
-        .group_by("search_time")
+        df.group_by("search_time")
         .agg(
             polars.len().alias("total"),
             polars.col("has_case").sum(),
@@ -499,6 +260,32 @@ def print_most_common(df) -> None:
         )
         .sort(by="search_time")
     )
+    print(
+        df.group_by("search_year", "search_month", "search_day_of_week")
+        .agg(
+            polars.len().alias("total"),
+        )
+        #.filter(
+        #    polars.col("total").lt(20)
+        #)
+        .sort(by=("search_year", "search_month", "search_day_of_week"))
+    )
+    # print("Total networks searched by season (somewhat bespoke seasons)")
+    # print(
+    #     df.group_by(("search_year", "search_month"))
+    #     .agg(
+    #         polars.col("search_time").first(),
+    #         polars.len().alias("total"),
+    #         polars.col("total_networks_searched").value_counts(),
+    #     )
+    #     .explode("total_networks_searched")
+    #     .unnest("total_networks_searched")
+    #     .with_columns(polars.col("count").round(100))
+    #     .sort(by=("search_time", "count"))
+    #     .drop("search_time")
+    # )
+    
+
 
 def sus_plates(df) -> None:
     plates = (
@@ -520,7 +307,6 @@ def sus_plates(df) -> None:
             reasons = set(filtered["reason"].unique().to_list())
             if month_duration > 3 or len(reasons) > 4:
                 print(plate, month_duration, reasons)
-        
 
 
 def interactive_console(df) -> None:
@@ -565,6 +351,287 @@ def interactive_console(df) -> None:
                 plotext.datetimes_to_string([xmax])[0],
             )
             plotext.show()
+
+
+def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
+    """
+    Persistent preprocessing is applied to df and saved for everyone's future reference.
+
+    - Every change to this causes a change in the committed data
+    - Affects disk space
+    - Columns added here will be available to people using other scripts
+    """
+    buckets = {
+        ".stolen": {
+            "606 e white theft suspect",
+            "atm theft",
+            "bpd ulta theft",
+            "ccso stolen",
+            "civil/theft/dus",
+            "larceny/theft offenses - suspect vehicle"
+            "larceny/theft offenses - suspect vehicle",
+            "larceny/theft offenses - suspect",
+            "larceny/theft offenses - theft",
+            "larceny/theft offenses",
+            "motor vehicle theft/stolen - ccso stolen veh",
+            "robbery",
+            "stolen ccso",
+            "stolen property offenses - poss stolen property",
+            "stolen property offenses - stolen veh",
+            "stolen property offenses - stolen",
+            "stolen property offenses",
+            "stolen",
+            "stolen?",
+            "theft suspect",
+            "theft",
+            "theftt",
+            "u of i stolen",
+            "urbana stolen",
+        },
+        ".vandalism": {
+            "destruction/damage/vandalism of property",
+        },
+        ".traffic-inf": {
+            "traffic infraction",
+            "traffic infraction - 2026-1253",
+        },
+        ".burglary": {
+            "36898 burg",
+            "95able for burglary",
+            "burg",
+            "burglary",
+            "burglary/breaking & entering - burlgary",
+            "burglary/breaking & entering",
+            "vcso burg suspect",
+            "vcso burgs",
+        },
+        ".homicide": {"homicide/death investigation", "homicide"},
+        ".assault/battery": {
+            "assault/battery offenses (domestic) - domestic",
+            "assault/battery offenses (domestic) - interview ro for domestic",
+            "assault/battery offenses (domestic) - stabbing",
+            "assault/battery offenses (domestic) - threats",
+            "assault/battery offenses (domestic)",
+            "assault/battery offenses - armed subject",
+            "assault/battery offenses - domestic cfs",
+            "assault/battery offenses - ro  95able",
+            "assault/battery offenses - ro arrestable",
+            "assault/battery offenses - stabbijg",
+            "assault/battery offenses - suspect",
+            "assault/battery offenses - wanted ro",
+            "assault/battery offenses - wanted subject",
+            "assault/battery offenses",
+            "battery",
+            "stabbing suspect",
+            "threats/harassment",
+            "wanted person (arrest warrant/fugitive) - agg batt to p/o",
+        },
+        ".wanted": {
+            "atl",
+            "warrant",
+            "wanted person (arrest warrant/fugitive) - ccso 99 for ro",
+            "wanted person (arrest warrant/fugitive) - persons wanted",
+            "wanted person (arrest warrant/fugitive) - wanted",
+            "wanted person (arrest warrant/fugitive)",
+            "wanted subject",
+            "wanted",
+        },
+        ".shooting": {
+            "assault/battery offenses - disorderly subject/battery",
+            "assault/battery offenses - shooting",
+            "assault/battery offenses - shooting investigation",
+            "assault/battery offenses - shots",
+            "domestic battery suspect",
+            "shooting suspect",
+            "shooting",
+            "shots fired",
+            "rantoul shooting",
+            "weapons offense (guns/shots fired) - armed subject",
+            "weapons offense (guns/shots fired) - armed subjects",
+            "weapons offense (guns/shots fired) - poss susp veh",
+            "weapons offense (guns/shots fired) - poss susp veh",
+            "weapons offense (guns/shots fired) - shooter car",
+            "weapons offense (guns/shots fired) - shooting in county jurisdiction",
+            "weapons offense (guns/shots fired) - shooting incident",
+            "weapons offense (guns/shots fired) - shooting investigation",
+            "weapons offense (guns/shots fired) - shooting suspect",
+            "weapons offense (guns/shots fired) - shooting",
+            "weapons offense (guns/shots fired) - shots fired",
+            "weapons offense (guns/shots fired) - shots",
+            "weapons offense (guns/shots fired) - suspect vehicle",
+            "weapons offense (guns/shots fired) - suspect veh",
+            "weapons offense (guns/shots fired) - urbana shooting",
+            "weapons offense (guns/shots fired) - unk vehicle blk suv",
+            "weapons offense (guns/shots fired) - wanted subject",
+            "weapons offense (guns/shots fired)",
+        },
+        ".sex crimes": {
+            "sex offenses - case followup",
+            "sex offenses",
+        },
+        ".hit/run": {
+            "hit and run",
+            "hit and run/car accident - 726 faust",
+            "hit and run/car accident - accident",
+            "hit and run/car accident - atl",
+            "hit and run/car accident - hit and run suspect",
+            "hit and run/car accident - hit and run",
+            "hit and run/car accident - hit run",
+            "hit and run/car accident - suspect vehicle",
+            "hit and run/car accident - suspect",
+            "hit and run/car accident",
+            "hit run",
+            "hit/run",
+            "other image search from alerts page associated with alert: hit and run",
+        },
+        ".vehicle theft": {
+            "hit and run/car accident - locate vehicle",
+            "hit and run/car accident - looking for suspect vehicle",
+            "hit and run/car accident - warrants",
+            "motor theft",
+            "motor vehicle theft/stolen - carjacking",
+            "motor vehicle theft/stolen - locate stolen vehicle 789",
+            "motor vehicle theft/stolen - stolen vehicle",
+            "motor vehicle theft/stolen - stolen vehicle cfs",
+            "motor vehicle theft/stolen - stolen",
+            "motor vehicle theft/stolen - theft",
+            "motor vehicle theft/stolen",
+            "mv theft",
+            "recovered stolen vehicle",
+            "stolen property offenses - case review",
+            "stolen property offenses - stolen vehicle",
+            "stolen veh",
+            "stolen vehicle",
+            "upd stolen veh",
+            "vehicle theft",
+        },
+        ".fled": {
+            "8298 flee",
+            "agg fleeing",
+            "criminal motor vehicle offense (incl. road rage/reckless) - agg fleeing - ccso",
+            "criminal motor vehicle offense (incl. road rage/reckless) - fleeing",
+            "fled from upd",
+            "fled upd",
+            "fled",
+            "flee and elude",
+            "flee",
+            "fleeing vehicle",
+            "fleeing",
+            "isp flee/elude",
+            "isp+flee/elude",
+            "obstructing the police (fleeing/eluding) - ccso pursuit",
+            "obstructing the police (fleeing/eluding) - flea",
+            "obstructing the police (fleeing/eluding) - fled from 728",
+            "obstructing the police (fleeing/eluding) - offender vehicle",
+            "obstructing the police (fleeing/eluding) - suspec",
+            "obstructing the police (fleeing/eluding) - wanted",
+            "obstructing the police (fleeing/eluding)",
+            "traffic infraction - fleeing",
+        },
+        ".assist other agency": {"assist other", "assist other agency"},
+        ".welfare check": {
+            "check welfare",
+            "welfare",
+            "welfare check",
+            "welfare check - check welfare",
+            "welfare check - missin person",
+            "welfare check - welfare",
+        },
+        ".shoplifting": {
+            "burglary/breaking & entering - retail theft",
+            "789 retail theft",
+            "larceny/theft offenses - retail theft",
+            "larceny/theft offenses - shoplifter",
+            "larceny/theft offenses - shoplifter not in custody",
+            "larceny/theft offenses - shoplifting suspect",
+            "lowes retail theft",
+            "retail theft / impound",
+            "retail theft at ulta",
+            "retail theft investigation",
+            "retail theft offender",
+            "retail theft suspect",
+            "retail theft",
+            "retain theft",
+            "shoplifeter",
+            "shoplifter at target",
+            "shoplifter not in custody",
+            "shoplifter",
+            "shoplifter/warrant",
+            "shoplifting",
+            "shopliter",
+
+        },
+        ".drugs": {
+            "drugs/narcotics",
+            "drugs/narcotics - case followup",
+            "drugs/narcotics - drugs",
+        },
+    }
+    case_no = r"(c|s|so|i|u)[0-9-]+"
+    df = df.with_columns(
+        polars.col("reason")
+        # Strip case nos. They will be saved in "case" column
+        .str.replace(case_no, "")
+        # Strip suspect's name
+        .str.replace("john.*", "")
+        # Strip trailing -
+        .str.replace(" - $", "")
+        # Strip trailing whitespace
+        .str.strip_chars()
+        # Bucket-ize reasons
+        .replace({
+            reason: group
+            for group, reasons in buckets.items()
+            for reason in [*reasons, group]
+        })
+        .alias("reason"),
+
+        # When case is missing, find it in reason
+        polars.when(polars.coalesce(polars.col("case"), polars.lit("")).len().gt(1))
+        .then(polars.col("case"))
+        .otherwise(
+            polars.when(polars.col("reason").str.contains(case_no))
+            .then(polars.col("reason").str.replace("(" + case_no + ")", r"\1"))
+            .otherwise(polars.lit(None))
+        )
+        .alias("case"),
+    )
+
+
+def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
+    """Non-persistent preprocessing is re-done each execution. Better for
+    prototyping.
+
+    - No impact on disk
+    - No changes to committed data (binary blob)
+    - Could take more time
+    - Columns won't be available to users not using this script
+
+    """
+    day_names = polars.Enum(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])
+    month_range = polars.Enum(["Jan-Mar", "Apr-Jun", "Jul-Sep", "Oct-Dec"])
+    month_range_map = {
+        "Jan": "Jan-Mar",
+        "Feb": "Jan-Mar",
+        "Mar": "Jan-Mar",
+        "Apr": "Apr-Jun",
+        "May": "Apr-Jun",
+        "Jun": "Apr-Jun",
+        "Jul": "Jul-Sep",
+        "Aug": "Jul-Sep",
+        "Sep": "Jul-Sep",
+        "Oct": "Oct-Dec",
+        "Nov": "Oct-Dec",
+        "Dec": "Oct-Dec",
+    }
+    df = df.with_columns(
+        polars.col("search_time").dt.year().alias("search_year"),
+        polars.col("search_time").dt.strftime("%b").replace(month_range_map).cast(month_range).alias("search_month"),
+        polars.col("search_time").dt.strftime("%a").cast(day_names).alias("search_day_of_week"),
+        polars.col("case").is_not_null().alias("has_case"),
+        polars.col("reason").str.len_chars().gt(3).alias("has_reason"),
+    )
+    return df
 
 
 if __name__ == "__main__":
