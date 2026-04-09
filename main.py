@@ -446,7 +446,14 @@ def print_most_common(df) -> None:
     )
     print("Officer")
     print(
-        df["name"]
+        df.select(
+            polars.col("name")
+            .cast(polars.String)
+            .str.split_exact(" ", 1)
+            .struct.field("field_0")
+            .alias("name")
+        )
+        ["name"]
         .value_counts()
         .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
         .sort(by="count")

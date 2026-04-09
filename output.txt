@@ -7,9 +7,9 @@ shape: (50, 3)
 │ ---                            ┆ ---   ┆ --- │
 │ str                            ┆ u32   ┆ i64 │
 ╞════════════════════════════════╪═══════╪═════╡
-│ susp. activity                 ┆ 26    ┆ 0   │
 │ missing                        ┆ 26    ┆ 0   │
 │ felony vehicle                 ┆ 26    ┆ 0   │
+│ susp. activity                 ┆ 26    ┆ 0   │
 │ atl rajon campbell ccso 99     ┆ 28    ┆ 0   │
 │ fraud                          ┆ 29    ┆ 0   │
 │ unk                            ┆ 30    ┆ 0   │
@@ -65,47 +65,47 @@ shape: (50, 3)
 │ ---                                                                               ┆ ---   ┆ --- │
 │ str                                                                               ┆ u32   ┆ i64 │
 ╞═══════════════════════════════════════════════════════════════════════════════════╪═══════╪═════╡
-│ obstructing the police (fleeing/eluding) - fleeing                                ┆ 3     ┆ 0   │
-│ assault/battery offenses - shooting in urbana                                     ┆ 3     ┆ 0   │
-│ welfare check - possible stroke                                                   ┆ 3     ┆ 0   │
-│ motor vehicle theft/stolen, wanted person (arrest warrant/fugitive)               ┆ 3     ┆ 0   │
-│ criminal motor vehicle offense (incl. road rage/reckless) - fled from state poli… ┆ 4     ┆ 0   │
+│ weapons offense (guns/shots fired) - stabbing suspect                             ┆ 3     ┆ 0   │
+│ larceny/theft offenses - investigation                                            ┆ 3     ┆ 0   │
+│ burglary/breaking & entering - burglary susp veh                                  ┆ 3     ┆ 0   │
+│ threats/harassment - threats                                                      ┆ 3     ┆ 0   │
+│ obstructing the police (fleeing/eluding) - agg fleeing                            ┆ 4     ┆ 0   │
 │ city planning/traffic analysis - deployment testing                               ┆ 4     ┆ 0   │
+│ criminal motor vehicle offense (incl. road rage/reckless) - plates stolen         ┆ 4     ┆ 0   │
 │ material witness - homicide                                                       ┆ 4     ┆ 0   │
 │ homicide/death investigation - post conviction investigation                      ┆ 4     ┆ 0   │
-│ obstructing the police (fleeing/eluding) - agg fleeing                            ┆ 4     ┆ 0   │
+│ criminal motor vehicle offense (incl. road rage/reckless) - fled from state poli… ┆ 4     ┆ 0   │
 │ wanted person (arrest warrant/fugitive) - 733 needed                              ┆ 4     ┆ 0   │
-│ criminal motor vehicle offense (incl. road rage/reckless) - plates stolen         ┆ 4     ┆ 0   │
 │ hit and run/car accident - hit and run suspect vehicle                            ┆ 4     ┆ 0   │
 │ assault/battery offenses - ro is  arrestable                                      ┆ 4     ┆ 0   │
-│ stalking                                                                          ┆ 5     ┆ 0   │
-│ criminal motor vehicle offense (incl. road rage/reckless) - 28 stolen             ┆ 5     ┆ 0   │
-│ assault/battery offenses, motor vehicle theft/stolen - stolen car                 ┆ 5     ┆ 0   │
 │ driving under the influence (dui/dwi/owi/ovi)                                     ┆ 5     ┆ 0   │
+│ assault/battery offenses, motor vehicle theft/stolen - stolen car                 ┆ 5     ┆ 0   │
+│ criminal motor vehicle offense (incl. road rage/reckless) - 28 stolen             ┆ 5     ┆ 0   │
+│ stalking                                                                          ┆ 5     ┆ 0   │
 │ criminal motor vehicle offense (incl. road rage/reckless) - plate on wrong veh    ┆ 6     ┆ 0   │
 │ alcohol offenses (non-dui)                                                        ┆ 6     ┆ 0   │
-│ disorderly conduct/disturbance - domestic cfs                                     ┆ 7     ┆ 0   │
-│ assault/battery offenses (domestic) - stolen/domestic                             ┆ 7     ┆ 0   │
-│ kidnapping/abduction - isp aoa                                                    ┆ 7     ┆ 0   │
 │ arson - case followup                                                             ┆ 7     ┆ 0   │
+│ disorderly conduct/disturbance - domestic cfs                                     ┆ 7     ┆ 0   │
+│ kidnapping/abduction - isp aoa                                                    ┆ 7     ┆ 0   │
+│ assault/battery offenses (domestic) - stolen/domestic                             ┆ 7     ┆ 0   │
 │ missing/endangered person/runaway                                                 ┆ 8     ┆ 0   │
 │ motor vehicle theft/stolen - carjack                                              ┆ 9     ┆ 0   │
 │ homicide/death investigation - post conviction                                    ┆ 10    ┆ 0   │
 │ disturbing public peace/riot - disorderly                                         ┆ 11    ┆ 0   │
-│ counterfeiting/forgery - fraud vehicle                                            ┆ 12    ┆ 0   │
 │ burglary/breaking & entering - burglary                                           ┆ 12    ┆ 0   │
+│ counterfeiting/forgery - fraud vehicle                                            ┆ 12    ┆ 0   │
 │ larceny/theft offenses - suspect vehicle                                          ┆ 14    ┆ 0   │
 │ .vandalism                                                                        ┆ 14    ┆ 0   │
 │ disorderly conduct/disturbance                                                    ┆ 20    ┆ 0   │
 │ disorderly conduct/disturbance - disorderly myoc                                  ┆ 24    ┆ 0   │
-│ criminal motor vehicle offense (incl. road rage/reckless)                         ┆ 27    ┆ 0   │
 │ arson                                                                             ┆ 27    ┆ 0   │
+│ criminal motor vehicle offense (incl. road rage/reckless)                         ┆ 27    ┆ 0   │
 │ .traffic-inf                                                                      ┆ 31    ┆ 0   │
 │ financial crime (embezzlement/fraud)                                              ┆ 72    ┆ 0   │
 │ .welfare check                                                                    ┆ 72    ┆ 0   │
 │ .wanted                                                                           ┆ 74    ┆ 0   │
-│ .sex crimes                                                                       ┆ 107   ┆ 0   │
 │ .shoplifting                                                                      ┆ 107   ┆ 0   │
+│ .sex crimes                                                                       ┆ 107   ┆ 0   │
 │ .burglary                                                                         ┆ 110   ┆ 0   │
 │ .homicide                                                                         ┆ 146   ┆ 0   │
 │ .drugs                                                                            ┆ 210   ┆ 1   │
@@ -118,22 +118,22 @@ shape: (50, 3)
 └───────────────────────────────────────────────────────────────────────────────────┴───────┴─────┘
 Officer
 shape: (10, 3)
-┌─────────────────────┬───────┬─────┐
-│ name                ┆ count ┆ %   │
-│ ---                 ┆ ---   ┆ --- │
-│ cat                 ┆ u32   ┆ i64 │
-╞═════════════════════╪═══════╪═════╡
-│ Kyle Reilly         ┆ 939   ┆ 2   │
-│ Logan Retzer        ┆ 1040  ┆ 3   │
-│ Paulo Alfonso       ┆ 1251  ┆ 3   │
-│ Payton Adams        ┆ 1428  ┆ 4   │
-│ Tim Frye            ┆ 1682  ┆ 4   │
-│ Sarah Burgener      ┆ 1802  ┆ 4   │
-│ Lauren Hill         ┆ 1844  ┆ 5   │
-│ Jonathan Kristensen ┆ 1856  ┆ 5   │
-│ Payton Lareau       ┆ 2110  ┆ 5   │
-│ Maxwell Villanti    ┆ 3539  ┆ 9   │
-└─────────────────────┴───────┴─────┘
+┌──────────┬───────┬─────┐
+│ name     ┆ count ┆ %   │
+│ ---      ┆ ---   ┆ --- │
+│ str      ┆ u32   ┆ i64 │
+╞══════════╪═══════╪═════╡
+│ Logan    ┆ 1040  ┆ 3   │
+│ Kyle     ┆ 1118  ┆ 3   │
+│ Paulo    ┆ 1251  ┆ 3   │
+│ Austin   ┆ 1396  ┆ 3   │
+│ Tim      ┆ 1682  ┆ 4   │
+│ Sarah    ┆ 1802  ┆ 4   │
+│ Lauren   ┆ 1844  ┆ 5   │
+│ Jonathan ┆ 2021  ┆ 5   │
+│ Payton   ┆ 3538  ┆ 9   │
+│ Maxwell  ┆ 3539  ┆ 9   │
+└──────────┴───────┴─────┘
 Org name
 shape: (2, 3)
 ┌─────────────────┬───────┬─────┐
