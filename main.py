@@ -648,7 +648,7 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "disturbing public peace/riot - disorderly",
             "disorderly conduct/disturbance - domestic cfs",
         },
-        "unspecified traffic": {
+        "unspecified traffic, putatively non-violent": {
             ".traffic-inf",
         },
         "myoc": {
@@ -661,7 +661,7 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "sctf",
             "suspicious vehicle",
         },
-        "possibly inequitable": {
+        "possibly inequitable, putatively non-violent": {
             ".drugs",
         },
     }

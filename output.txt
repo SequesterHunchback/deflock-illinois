@@ -1,17 +1,3 @@
-Champaign IL PD_Organization_Audit_2025-01-01_2025-02-01.csv: 3348 rows, 422327 bytes
-Champaign IL PD_Organization_Audit_2025-02-01_2025-03-01.csv: 2962 rows, 375241 bytes
-Champaign IL PD_Organization_Audit_2025-03-01_2025-04-01.csv: 3732 rows, 489076 bytes
-Champaign IL PD_Organization_Audit_2025-04-01_2025-05-01.csv: 2151 rows, 272606 bytes
-Champaign IL PD_Organization_Audit_2025-05-01_2025-06-01.csv: 3547 rows, 454014 bytes
-Champaign IL PD_Organization_Audit_2025-06-01_2025-07-01.xlsx: 3285 rows, 190695 bytes
-Champaign IL PD_Organization_Audit_2025-07-01_2025-08-01.xlsx: 3262 rows, 247088 bytes
-Champaign IL PD_Organization_Audit_2025-08-01_09-01.csv: 2945 rows, 477699 bytes
-Champaign IL PD_Organization_Audit_2025-08-01_2025-08-31.csv: 2570 rows, 417501 bytes
-Champaign IL PD_Organization_Audit_2025-10-01_2025-10-31.csv.xlsx: 2097 rows, 138211 bytes
-Champaign IL PD_Organization_Audit_2025-11-01_2025-11-30.csv.xlsx: 2750 rows, 176505 bytes
-Champaign IL PD_Organization_Audit_2025-12-01_2025-12-31.csv.xlsx: 2502 rows, 238186 bytes
-Champaign IL PD_Organization_Audit_2026-01-01_2026-01-31.csv.xlsx: 2273 rows, 227804 bytes
-Champaign IL PD_Organization_Audit_2026-02-01_2025-02-28.csv: 2735 rows, 623519 bytes
 full.parquet: 40159 rows, 337344 bytes
 name Categorical
 total_networks_searched Int64
@@ -43,8 +29,8 @@ shape: (50, 3)
 │ disorderly conduct/disturbance       ┆ 31    ┆ 0.1  │
 │ 25-19669                             ┆ 31    ┆ 0.1  │
 │ test                                 ┆ 37    ┆ 0.1  │
-│ 31591                                ┆ 38    ┆ 0.1  │
 │ myoc                                 ┆ 38    ┆ 0.1  │
+│ 31591                                ┆ 38    ┆ 0.1  │
 │ 1210 walnut                          ┆ 39    ┆ 0.1  │
 │ arson                                ┆ 42    ┆ 0.1  │
 │ traffic stop                         ┆ 43    ┆ 0.1  │
@@ -67,8 +53,8 @@ shape: (50, 3)
 │ home invasion                        ┆ 86    ┆ 0.2  │
 │ forgery                              ┆ 91    ┆ 0.2  │
 │ ro 99                                ┆ 94    ┆ 0.2  │
-│ criminal damage                      ┆ 95    ┆ 0.2  │
 │ 99                                   ┆ 95    ┆ 0.2  │
+│ criminal damage                      ┆ 95    ┆ 0.2  │
 │ fight                                ┆ 101   ┆ 0.3  │
 │ .sex crimes                          ┆ 119   ┆ 0.3  │
 │ armed subject                        ┆ 120   ┆ 0.3  │
@@ -91,19 +77,19 @@ shape: (50, 3)
 └──────────────────────────────────────┴───────┴──────┘
 Possibly inappropriate reasons
 shape: (7, 2)
-┌────────────────────────┬───────┐
-│ reason_class           ┆ count │
-│ ---                    ┆ ---   │
-│ str                    ┆ u32   │
-╞════════════════════════╪═══════╡
-│ underspecified         ┆ 324   │
-│ non-crimes             ┆ 4     │
-│ unspecified traffic    ┆ 69    │
-│ possibly inequitable   ┆ 304   │
-│ low-value, non-violent ┆ 860   │
-│ myoc                   ┆ 62    │
-│ other                  ┆ 38536 │
-└────────────────────────┴───────┘
+┌──────────────────────────────────────────────┬───────┐
+│ reason_class                                 ┆ count │
+│ ---                                          ┆ ---   │
+│ str                                          ┆ u32   │
+╞══════════════════════════════════════════════╪═══════╡
+│ non-crimes                                   ┆ 4     │
+│ other                                        ┆ 38536 │
+│ possibly inequitable, putatively non-violent ┆ 304   │
+│ low-value, non-violent                       ┆ 860   │
+│ underspecified                               ┆ 324   │
+│ unspecified traffic, putatively non-violent  ┆ 69    │
+│ myoc                                         ┆ 62    │
+└──────────────────────────────────────────────┴───────┘
 Officer
 shape: (10, 3)
 ┌──────────┬───────┬─────┐
@@ -149,8 +135,8 @@ shape: (20, 3)
 │ suv           ┆ 92    ┆ 0   │
 │ dodge         ┆ 93    ┆ 0   │
 │ kia           ┆ 94    ┆ 0   │
-│ black         ┆ 104   ┆ 0   │
 │ hyundai       ┆ 104   ┆ 0   │
+│ black         ┆ 104   ┆ 0   │
 │ silver_grey   ┆ 109   ┆ 0   │
 │ arizona       ┆ 118   ┆ 0   │
 │ white suv     ┆ 127   ┆ 0   │
