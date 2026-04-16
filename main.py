@@ -3,7 +3,7 @@ import polars
 import plotext
 import datetime
 
-audits_source = pathlib.Path("../../../Documents/deflockchampaign.github.io/foias/champaign_police_department/1/audits")
+audits_source = pathlib.Path("../../../Documents/deflockchampaign.github.io/foias/champaign_police_department/1/org_audit")
 
 
 def main(
@@ -22,7 +22,6 @@ def main(
     # city planning/traffic analysis - deployment testing
 
     # minor crimes:
-    # welfare
     # shoplifting
     # vandalism
 
@@ -43,6 +42,7 @@ def main(
         df = polars.read_parquet(consolidated)
 
     df = non_persistent_preprocessing(df)
+    df.write_csv("test.csv")
     print(f"{consolidated.name}: {len(df)} rows, {consolidated.stat().st_size} bytes")
 
     for col, type in df.schema.items():
@@ -192,12 +192,31 @@ def altair_plot(
 
 
 def print_most_common(df) -> None:
+    print("Reasons")
+    print(
+        df
+        ["reason"]
+        .value_counts()
+        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
+        .sort(by="count")
+        .tail(50)
+    )
+    nv_reasons = {
+        ".shoplifting",
+        # ".drugs",
+        "myoc",
+        ".burglary",
+        ".vandalism",
+        "disorderly conduct/disturbance",
+        "disorderly conduct/disturbance - disorderly myoc",
+        "alcohol offenses (non-dui)",
+    }
     print("Reasons < 2026")
     print(
         df.filter(polars.col("search_year") < 2026)
         ["reason"]
         .value_counts()
-        .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
+        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
         .sort(by="count")
         .tail(50)
     )
@@ -206,7 +225,7 @@ def print_most_common(df) -> None:
         df.filter(polars.col("search_year") >= 2026)
         ["reason"]
         .value_counts()
-        .with_columns((polars.col("count") / len(df) * 100).round().cast(int).alias("%"))
+        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
         .sort(by="count")
         .tail(50)
     )
@@ -252,27 +271,32 @@ def print_most_common(df) -> None:
     )
     print("Searches by month")
     print(
-        df.group_by("search_time")
+        df.with_columns(
+            polars.struct(
+                polars.col("search_time").dt.year().alias("year"),
+                polars.col("search_time").dt.month().alias("month"),
+            ).alias("search_month")
+        ).group_by("search_month")
         .agg(
             polars.len().alias("total"),
             polars.col("has_case").sum(),
             polars.col("has_reason").sum(),
         )
-        .sort(by="search_time")
+        .sort(by="search_month")
     )
     print(
-        df.group_by("search_year", "search_month", "search_day_of_week")
+        df.group_by("search_year", "quarter", "search_day_of_week")
         .agg(
             polars.len().alias("total"),
         )
         #.filter(
         #    polars.col("total").lt(20)
         #)
-        .sort(by=("search_year", "search_month", "search_day_of_week"))
+        .sort(by=("search_year", "quarter", "search_day_of_week"))
     )
     # print("Total networks searched by season (somewhat bespoke seasons)")
     # print(
-    #     df.group_by(("search_year", "search_month"))
+    #     df.group_by(("search_year", "quarter"))
     #     .agg(
     #         polars.col("search_time").first(),
     #         polars.len().alias("total"),
@@ -596,6 +620,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         )
         .alias("case"),
     )
+    return df
 
 
 def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
@@ -626,7 +651,7 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
     }
     df = df.with_columns(
         polars.col("search_time").dt.year().alias("search_year"),
-        polars.col("search_time").dt.strftime("%b").replace(month_range_map).cast(month_range).alias("search_month"),
+        polars.col("search_time").dt.strftime("%b").replace(month_range_map).cast(month_range).alias("quarter"),
         polars.col("search_time").dt.strftime("%a").cast(day_names).alias("search_day_of_week"),
         polars.col("case").is_not_null().alias("has_case"),
         polars.col("reason").str.len_chars().gt(3).alias("has_reason"),
