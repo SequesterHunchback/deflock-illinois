@@ -1,4 +1,18 @@
-full.parquet: 40159 rows, 337431 bytes
+Champaign IL PD_Organization_Audit_2025-01-01_2025-02-01.csv: 3348 rows, 422327 bytes
+Champaign IL PD_Organization_Audit_2025-02-01_2025-03-01.csv: 2962 rows, 375241 bytes
+Champaign IL PD_Organization_Audit_2025-03-01_2025-04-01.csv: 3732 rows, 489076 bytes
+Champaign IL PD_Organization_Audit_2025-04-01_2025-05-01.csv: 2151 rows, 272606 bytes
+Champaign IL PD_Organization_Audit_2025-05-01_2025-06-01.csv: 3547 rows, 454014 bytes
+Champaign IL PD_Organization_Audit_2025-06-01_2025-07-01.xlsx: 3285 rows, 190695 bytes
+Champaign IL PD_Organization_Audit_2025-07-01_2025-08-01.xlsx: 3262 rows, 247088 bytes
+Champaign IL PD_Organization_Audit_2025-08-01_09-01.csv: 2945 rows, 477699 bytes
+Champaign IL PD_Organization_Audit_2025-08-01_2025-08-31.csv: 2570 rows, 417501 bytes
+Champaign IL PD_Organization_Audit_2025-10-01_2025-10-31.csv.xlsx: 2097 rows, 138211 bytes
+Champaign IL PD_Organization_Audit_2025-11-01_2025-11-30.csv.xlsx: 2750 rows, 176505 bytes
+Champaign IL PD_Organization_Audit_2025-12-01_2025-12-31.csv.xlsx: 2502 rows, 238186 bytes
+Champaign IL PD_Organization_Audit_2026-01-01_2026-01-31.csv.xlsx: 2273 rows, 227804 bytes
+Champaign IL PD_Organization_Audit_2026-02-01_2025-02-28.csv: 2735 rows, 623519 bytes
+full.parquet: 40159 rows, 337344 bytes
 name Categorical
 total_networks_searched Int64
 license_plate String
@@ -16,6 +30,7 @@ quarter Enum(categories=['Jan-Mar', 'Apr-Jun', 'Jul-Sep', 'Oct-Dec'])
 search_day_of_week Enum(categories=['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
 has_case Boolean
 has_reason Boolean
+reason_class String
 Reasons
 shape: (50, 3)
 ┌──────────────────────────────────────┬───────┬──────┐
@@ -28,8 +43,8 @@ shape: (50, 3)
 │ disorderly conduct/disturbance       ┆ 31    ┆ 0.1  │
 │ 25-19669                             ┆ 31    ┆ 0.1  │
 │ test                                 ┆ 37    ┆ 0.1  │
-│ myoc                                 ┆ 38    ┆ 0.1  │
 │ 31591                                ┆ 38    ┆ 0.1  │
+│ myoc                                 ┆ 38    ┆ 0.1  │
 │ 1210 walnut                          ┆ 39    ┆ 0.1  │
 │ arson                                ┆ 42    ┆ 0.1  │
 │ traffic stop                         ┆ 43    ┆ 0.1  │
@@ -57,139 +72,38 @@ shape: (50, 3)
 │ fight                                ┆ 101   ┆ 0.3  │
 │ .sex crimes                          ┆ 119   ┆ 0.3  │
 │ armed subject                        ┆ 120   ┆ 0.3  │
-│ .welfare check                       ┆ 136   ┆ 0.3  │
+│ .welfare check                       ┆ 144   ┆ 0.4  │
 │ suspect vehicle                      ┆ 146   ┆ 0.4  │
 │ sctf                                 ┆ 186   ┆ 0.5  │
 │ domestic                             ┆ 202   ┆ 0.5  │
 │ .drugs                               ┆ 304   ┆ 0.8  │
-│ .burglary                            ┆ 309   ┆ 0.8  │
+│ .burglary                            ┆ 312   ┆ 0.8  │
 │ .shoplifting                         ┆ 347   ┆ 0.9  │
 │ .homicide                            ┆ 349   ┆ 0.9  │
 │ .wanted                              ┆ 370   ┆ 0.9  │
 │ .assault/battery                     ┆ 774   ┆ 1.9  │
-│ .shooting                            ┆ 1436  ┆ 3.6  │
-│ .vehicle theft                       ┆ 1876  ┆ 4.7  │
-│ .fled                                ┆ 2059  ┆ 5.1  │
+│ .shooting                            ┆ 1439  ┆ 3.6  │
+│ .vehicle theft                       ┆ 1881  ┆ 4.7  │
+│ .fled                                ┆ 2063  ┆ 5.1  │
 │ .hit/run                             ┆ 2174  ┆ 5.4  │
-│ .stolen                              ┆ 3317  ┆ 8.3  │
+│ .stolen                              ┆ 3320  ┆ 8.3  │
 │                                      ┆ 19861 ┆ 49.5 │
 └──────────────────────────────────────┴───────┴──────┘
-Reasons < 2026
-shape: (50, 3)
-┌────────────────────────────────┬───────┬──────┐
-│ reason                         ┆ count ┆ %    │
-│ ---                            ┆ ---   ┆ ---  │
-│ str                            ┆ u32   ┆ f64  │
-╞════════════════════════════════╪═══════╪══════╡
-│ susp. activity                 ┆ 26    ┆ 0.1  │
-│ missing                        ┆ 26    ┆ 0.1  │
-│ felony vehicle                 ┆ 26    ┆ 0.1  │
-│ atl rajon campbell ccso 99     ┆ 28    ┆ 0.1  │
-│ fraud                          ┆ 29    ┆ 0.1  │
-│ unk                            ┆ 30    ┆ 0.1  │
-│ 25-19669                       ┆ 31    ┆ 0.1  │
-│ test                           ┆ 37    ┆ 0.1  │
-│ myoc                           ┆ 38    ┆ 0.1  │
-│ 31591                          ┆ 38    ┆ 0.1  │
-│ .traffic-inf                   ┆ 38    ┆ 0.1  │
-│ 1210 walnut                    ┆ 39    ┆ 0.1  │
-│ traffic stop                   ┆ 43    ┆ 0.1  │
-│ bmv                            ┆ 44    ┆ 0.1  │
-│ daytime search for best result ┆ 45    ┆ 0.1  │
-│ .assist other agency           ┆ 49    ┆ 0.1  │
-│ ccso 99 for ro                 ┆ 49    ┆ 0.1  │
-│ dui                            ┆ 53    ┆ 0.1  │
-│ follow up                      ┆ 54    ┆ 0.1  │
-│ attempt kidnapping             ┆ 57    ┆ 0.1  │
-│ rajon campbell 99              ┆ 59    ┆ 0.1  │
-│ / atl rajon campbell 99        ┆ 62    ┆ 0.2  │
-│ .welfare check                 ┆ 64    ┆ 0.2  │
-│ bank robbery                   ┆ 65    ┆ 0.2  │
-│ 797                            ┆ 68    ┆ 0.2  │
-│ suspicious vehicle             ┆ 71    ┆ 0.2  │
-│ sean mills                     ┆ 77    ┆ 0.2  │
-│ helping hill with subpoena     ┆ 84    ┆ 0.2  │
-│ home invasion                  ┆ 86    ┆ 0.2  │
-│ forgery                        ┆ 91    ┆ 0.2  │
-│ .drugs                         ┆ 94    ┆ 0.2  │
-│ ro 99                          ┆ 94    ┆ 0.2  │
-│ criminal damage                ┆ 95    ┆ 0.2  │
-│ 99                             ┆ 95    ┆ 0.2  │
-│ fight                          ┆ 101   ┆ 0.3  │
-│ armed subject                  ┆ 120   ┆ 0.3  │
-│ suspect vehicle                ┆ 146   ┆ 0.4  │
-│ sctf                           ┆ 186   ┆ 0.5  │
-│ .burglary                      ┆ 199   ┆ 0.5  │
-│ domestic                       ┆ 202   ┆ 0.5  │
-│ .homicide                      ┆ 203   ┆ 0.5  │
-│ .shoplifting                   ┆ 240   ┆ 0.6  │
-│ .wanted                        ┆ 296   ┆ 0.7  │
-│ .assault/battery               ┆ 412   ┆ 1.0  │
-│ .vehicle theft                 ┆ 788   ┆ 2.0  │
-│ .shooting                      ┆ 835   ┆ 2.1  │
-│ .hit/run                       ┆ 1394  ┆ 3.5  │
-│ .fled                          ┆ 1642  ┆ 4.1  │
-│ .stolen                        ┆ 2963  ┆ 7.4  │
-│                                ┆ 19860 ┆ 49.5 │
-└────────────────────────────────┴───────┴──────┘
-Reasons >= 2026
-shape: (50, 3)
-┌───────────────────────────────────────────────────────────────────────────────────┬───────┬─────┐
-│ reason                                                                            ┆ count ┆ %   │
-│ ---                                                                               ┆ ---   ┆ --- │
-│ str                                                                               ┆ u32   ┆ f64 │
-╞═══════════════════════════════════════════════════════════════════════════════════╪═══════╪═════╡
-│ assault/battery offenses - shooting in urbana                                     ┆ 3     ┆ 0.0 │
-│ burglary/breaking & entering - burglary susp veh                                  ┆ 3     ┆ 0.0 │
-│ stolen property offenses - stolen plate                                           ┆ 3     ┆ 0.0 │
-│ weapons offense (guns/shots fired) - vehicle track                                ┆ 3     ┆ 0.0 │
-│ material witness - homicide                                                       ┆ 4     ┆ 0.0 │
-│ homicide/death investigation - post conviction investigation                      ┆ 4     ┆ 0.0 │
-│ hit and run/car accident - hit and run suspect vehicle                            ┆ 4     ┆ 0.0 │
-│ criminal motor vehicle offense (incl. road rage/reckless) - fled from state poli… ┆ 4     ┆ 0.0 │
-│ wanted person (arrest warrant/fugitive) - 733 needed                              ┆ 4     ┆ 0.0 │
-│ assault/battery offenses - ro is  arrestable                                      ┆ 4     ┆ 0.0 │
-│ obstructing the police (fleeing/eluding) - agg fleeing                            ┆ 4     ┆ 0.0 │
-│ criminal motor vehicle offense (incl. road rage/reckless) - plates stolen         ┆ 4     ┆ 0.0 │
-│ city planning/traffic analysis - deployment testing                               ┆ 4     ┆ 0.0 │
-│ stalking                                                                          ┆ 5     ┆ 0.0 │
-│ criminal motor vehicle offense (incl. road rage/reckless) - 28 stolen             ┆ 5     ┆ 0.0 │
-│ driving under the influence (dui/dwi/owi/ovi)                                     ┆ 5     ┆ 0.0 │
-│ assault/battery offenses, motor vehicle theft/stolen - stolen car                 ┆ 5     ┆ 0.0 │
-│ criminal motor vehicle offense (incl. road rage/reckless) - plate on wrong veh    ┆ 6     ┆ 0.0 │
-│ alcohol offenses (non-dui)                                                        ┆ 6     ┆ 0.0 │
-│ disorderly conduct/disturbance - domestic cfs                                     ┆ 7     ┆ 0.0 │
-│ arson - case followup                                                             ┆ 7     ┆ 0.0 │
-│ kidnapping/abduction - isp aoa                                                    ┆ 7     ┆ 0.0 │
-│ assault/battery offenses (domestic) - stolen/domestic                             ┆ 7     ┆ 0.0 │
-│ missing/endangered person/runaway                                                 ┆ 8     ┆ 0.0 │
-│ motor vehicle theft/stolen - carjack                                              ┆ 9     ┆ 0.0 │
-│ homicide/death investigation - post conviction                                    ┆ 10    ┆ 0.0 │
-│ disturbing public peace/riot - disorderly                                         ┆ 11    ┆ 0.0 │
-│ burglary/breaking & entering - burglary                                           ┆ 12    ┆ 0.0 │
-│ counterfeiting/forgery - fraud vehicle                                            ┆ 12    ┆ 0.0 │
-│ .vandalism                                                                        ┆ 14    ┆ 0.0 │
-│ larceny/theft offenses - suspect vehicle                                          ┆ 14    ┆ 0.0 │
-│ disorderly conduct/disturbance                                                    ┆ 20    ┆ 0.0 │
-│ disorderly conduct/disturbance - disorderly myoc                                  ┆ 24    ┆ 0.1 │
-│ criminal motor vehicle offense (incl. road rage/reckless)                         ┆ 27    ┆ 0.1 │
-│ arson                                                                             ┆ 27    ┆ 0.1 │
-│ .traffic-inf                                                                      ┆ 31    ┆ 0.1 │
-│ financial crime (embezzlement/fraud)                                              ┆ 72    ┆ 0.2 │
-│ .welfare check                                                                    ┆ 72    ┆ 0.2 │
-│ .wanted                                                                           ┆ 74    ┆ 0.2 │
-│ .sex crimes                                                                       ┆ 107   ┆ 0.3 │
-│ .shoplifting                                                                      ┆ 107   ┆ 0.3 │
-│ .burglary                                                                         ┆ 110   ┆ 0.3 │
-│ .homicide                                                                         ┆ 146   ┆ 0.4 │
-│ .drugs                                                                            ┆ 210   ┆ 0.5 │
-│ .stolen                                                                           ┆ 354   ┆ 0.9 │
-│ .assault/battery                                                                  ┆ 362   ┆ 0.9 │
-│ .fled                                                                             ┆ 417   ┆ 1.0 │
-│ .shooting                                                                         ┆ 601   ┆ 1.5 │
-│ .hit/run                                                                          ┆ 780   ┆ 1.9 │
-│ .vehicle theft                                                                    ┆ 1088  ┆ 2.7 │
-└───────────────────────────────────────────────────────────────────────────────────┴───────┴─────┘
+Possibly inappropriate reasons
+shape: (7, 2)
+┌────────────────────────┬───────┐
+│ reason_class           ┆ count │
+│ ---                    ┆ ---   │
+│ str                    ┆ u32   │
+╞════════════════════════╪═══════╡
+│ underspecified         ┆ 324   │
+│ non-crimes             ┆ 4     │
+│ unspecified traffic    ┆ 69    │
+│ possibly inequitable   ┆ 304   │
+│ low-value, non-violent ┆ 860   │
+│ myoc                   ┆ 62    │
+│ other                  ┆ 38536 │
+└────────────────────────┴───────┘
 Officer
 shape: (10, 3)
 ┌──────────┬───────┬─────┐

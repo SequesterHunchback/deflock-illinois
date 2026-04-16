@@ -11,25 +11,6 @@ def main(
         consolidated: pathlib.Path = audits_source / "full.parquet",
         fresh: bool = False,
 ) -> None:
-
-    # Mostly:
-    # ""
-
-    # sketchy practice:
-    # myoc: Make your own case
-
-    # not a crime:
-    # city planning/traffic analysis - deployment testing
-
-    # minor crimes:
-    # shoplifting
-    # vandalism
-
-    # Other unspecific reasons:
-    # "unk"
-    # sctf: Street Crimes Task Force
-    # "suspicious vehicle"
-
     polars.Config.set_tbl_rows(200)
     polars.Config.set_tbl_width_chars(200)
     polars.Config.set_fmt_str_lengths(80)
@@ -201,34 +182,30 @@ def print_most_common(df) -> None:
         .sort(by="count")
         .tail(50)
     )
-    nv_reasons = {
-        ".shoplifting",
-        # ".drugs",
-        "myoc",
-        ".burglary",
-        ".vandalism",
-        "disorderly conduct/disturbance",
-        "disorderly conduct/disturbance - disorderly myoc",
-        "alcohol offenses (non-dui)",
-    }
-    print("Reasons < 2026")
+    print("Possibly inappropriate reasons")
     print(
-        df.filter(polars.col("search_year") < 2026)
-        ["reason"]
+        df
+        ["reason_class"]
         .value_counts()
-        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
-        .sort(by="count")
-        .tail(50)
     )
-    print("Reasons >= 2026")
-    print(
-        df.filter(polars.col("search_year") >= 2026)
-        ["reason"]
-        .value_counts()
-        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
-        .sort(by="count")
-        .tail(50)
-    )
+    # print("Reasons < 2026")
+    # print(
+    #     df.filter(polars.col("search_year") < 2026)
+    #     ["reason"]
+    #     .value_counts()
+    #     .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
+    #     .sort(by="count")
+    #     .tail(50)
+    # )
+    # print("Reasons >= 2026")
+    # print(
+    #     df.filter(polars.col("search_year") >= 2026)
+    #     ["reason"]
+    #     .value_counts()
+    #     .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
+    #     .sort(by="count")
+    #     .tail(50)
+    # )
     print("Officer")
     print(
         df.select(
@@ -402,6 +379,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "stolen ccso",
             "stolen property offenses - poss stolen property",
             "stolen property offenses - stolen veh",
+            "stolen property offenses - stolen plate",
             "stolen property offenses - stolen",
             "stolen property offenses",
             "stolen",
@@ -424,6 +402,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "95able for burglary",
             "burg",
             "burglary",
+            "burglary/breaking & entering - burglary susp veh",
             "burglary/breaking & entering - burlgary",
             "burglary/breaking & entering",
             "vcso burg suspect",
@@ -463,6 +442,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         ".shooting": {
             "assault/battery offenses - disorderly subject/battery",
             "assault/battery offenses - shooting",
+            "assault/battery offenses - shooting in urbana",
             "assault/battery offenses - shooting investigation",
             "assault/battery offenses - shots",
             "domestic battery suspect",
@@ -509,6 +489,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "other image search from alerts page associated with alert: hit and run",
         },
         ".vehicle theft": {
+            "assault/battery offenses, motor vehicle theft/stolen - stolen car",
             "hit and run/car accident - locate vehicle",
             "hit and run/car accident - looking for suspect vehicle",
             "hit and run/car accident - warrants",
@@ -543,6 +524,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "fleeing",
             "isp flee/elude",
             "isp+flee/elude",
+            "obstructing the police (fleeing/eluding) - agg fleeing",
             "obstructing the police (fleeing/eluding) - ccso pursuit",
             "obstructing the police (fleeing/eluding) - flea",
             "obstructing the police (fleeing/eluding) - fled from 728",
@@ -555,6 +537,7 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         ".assist other agency": {"assist other", "assist other agency"},
         ".welfare check": {
             "check welfare",
+            "missing/endangered person/runaway",
             "welfare",
             "welfare check",
             "welfare check - check welfare",
@@ -649,12 +632,51 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         "Nov": "Oct-Dec",
         "Dec": "Oct-Dec",
     }
+    reason_class = {
+        "non-crimes": {
+            "city planning/traffic analysis - deployment testing"
+        },
+        "low-value, non-violent": {
+            ".shoplifting",
+            ".vandalism",
+            "disorderly conduct/disturbance",
+            ".burglary",
+            "alcohol offenses (non-dui)",
+            "forgery",
+            "fraud",
+            "counterfeiting/forgery - fraud vehicle",
+            "disturbing public peace/riot - disorderly",
+            "disorderly conduct/disturbance - domestic cfs",
+        },
+        "unspecified traffic": {
+            ".traffic-inf",
+        },
+        "myoc": {
+            "disorderly conduct/disturbance - disorderly myoc",
+            "myoc",
+        },
+        "underspecified": {
+            "unk",
+            "test",
+            "sctf",
+            "suspicious vehicle",
+        },
+        "possibly inequitable": {
+            ".drugs",
+        },
+    }
+    reason_class_inv = {
+        reason: class_
+        for class_, reasons in reason_class.items()
+        for reason in reasons
+    }
     df = df.with_columns(
         polars.col("search_time").dt.year().alias("search_year"),
         polars.col("search_time").dt.strftime("%b").replace(month_range_map).cast(month_range).alias("quarter"),
         polars.col("search_time").dt.strftime("%a").cast(day_names).alias("search_day_of_week"),
         polars.col("case").is_not_null().alias("has_case"),
         polars.col("reason").str.len_chars().gt(3).alias("has_reason"),
+        polars.col("reason").replace_strict(reason_class_inv, default="other").alias("reason_class"),
     )
     return df
 
