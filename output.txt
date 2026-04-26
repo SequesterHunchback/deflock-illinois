@@ -1,4 +1,18 @@
-full.parquet: 40159 rows, 337344 bytes
+Champaign IL PD_Organization_Audit_2025-01-01_2025-02-01.csv: 3348 rows, 422327 bytes
+Champaign IL PD_Organization_Audit_2025-02-01_2025-03-01.csv: 2962 rows, 375241 bytes
+Champaign IL PD_Organization_Audit_2025-03-01_2025-04-01.csv: 3732 rows, 489076 bytes
+Champaign IL PD_Organization_Audit_2025-04-01_2025-05-01.csv: 2151 rows, 272606 bytes
+Champaign IL PD_Organization_Audit_2025-05-01_2025-06-01.csv: 3547 rows, 454014 bytes
+Champaign IL PD_Organization_Audit_2025-06-01_2025-07-01.xlsx: 3285 rows, 190695 bytes
+Champaign IL PD_Organization_Audit_2025-07-01_2025-08-01.xlsx: 3262 rows, 247088 bytes
+Champaign IL PD_Organization_Audit_2025-08-01_09-01.csv: 2945 rows, 477699 bytes
+Champaign IL PD_Organization_Audit_2025-08-01_2025-08-31.csv: 2570 rows, 417501 bytes
+Champaign IL PD_Organization_Audit_2025-10-01_2025-10-31.csv.xlsx: 2097 rows, 138211 bytes
+Champaign IL PD_Organization_Audit_2025-11-01_2025-11-30.csv.xlsx: 2750 rows, 176505 bytes
+Champaign IL PD_Organization_Audit_2025-12-01_2025-12-31.csv.xlsx: 2502 rows, 238186 bytes
+Champaign IL PD_Organization_Audit_2026-01-01_2026-01-31.csv.xlsx: 2273 rows, 227804 bytes
+Champaign IL PD_Organization_Audit_2026-02-01_2025-02-28.csv: 2735 rows, 623519 bytes
+full.parquet: 40159 rows, 337331 bytes
 name Categorical
 total_networks_searched Int64
 license_plate String
@@ -17,6 +31,20 @@ search_day_of_week Enum(categories=['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'S
 has_case Boolean
 has_reason Boolean
 reason_class String
+Do they have reasons
+shape: (6, 3)
+┌───────────────┬───────┬──────┐
+│ case_reason   ┆ count ┆ %    │
+│ ---           ┆ ---   ┆ ---  │
+│ struct[2]     ┆ u32   ┆ f64  │
+╞═══════════════╪═══════╪══════╡
+│ {null,true}   ┆ 1     ┆ 0.0  │
+│ {null,false}  ┆ 2     ┆ 0.0  │
+│ {false,true}  ┆ 665   ┆ 1.7  │
+│ {true,true}   ┆ 9567  ┆ 23.8 │
+│ {true,false}  ┆ 10179 ┆ 25.3 │
+│ {false,false} ┆ 19745 ┆ 49.2 │
+└───────────────┴───────┴──────┘
 Reasons
 shape: (50, 3)
 ┌──────────────────────────────────────┬───────┬──────┐
@@ -24,16 +52,15 @@ shape: (50, 3)
 │ ---                                  ┆ ---   ┆ ---  │
 │ str                                  ┆ u32   ┆ f64  │
 ╞══════════════════════════════════════╪═══════╪══════╡
+│ atl rajon campbell ccso 99           ┆ 28    ┆ 0.1  │
 │ fraud                                ┆ 29    ┆ 0.1  │
 │ unk                                  ┆ 30    ┆ 0.1  │
-│ disorderly conduct/disturbance       ┆ 31    ┆ 0.1  │
 │ 25-19669                             ┆ 31    ┆ 0.1  │
+│ disorderly conduct/disturbance       ┆ 31    ┆ 0.1  │
 │ test                                 ┆ 37    ┆ 0.1  │
-│ myoc                                 ┆ 38    ┆ 0.1  │
 │ 31591                                ┆ 38    ┆ 0.1  │
 │ 1210 walnut                          ┆ 39    ┆ 0.1  │
 │ arson                                ┆ 42    ┆ 0.1  │
-│ traffic stop                         ┆ 43    ┆ 0.1  │
 │ bmv                                  ┆ 44    ┆ 0.1  │
 │ daytime search for best result       ┆ 45    ┆ 0.1  │
 │ .assist other agency                 ┆ 49    ┆ 0.1  │
@@ -43,9 +70,9 @@ shape: (50, 3)
 │ attempt kidnapping                   ┆ 57    ┆ 0.1  │
 │ rajon campbell 99                    ┆ 59    ┆ 0.1  │
 │ / atl rajon campbell 99              ┆ 62    ┆ 0.2  │
+│ .myoc                                ┆ 62    ┆ 0.2  │
 │ bank robbery                         ┆ 65    ┆ 0.2  │
 │ 797                                  ┆ 68    ┆ 0.2  │
-│ .traffic-inf                         ┆ 69    ┆ 0.2  │
 │ suspicious vehicle                   ┆ 71    ┆ 0.2  │
 │ financial crime (embezzlement/fraud) ┆ 74    ┆ 0.2  │
 │ sean mills                           ┆ 77    ┆ 0.2  │
@@ -53,9 +80,10 @@ shape: (50, 3)
 │ home invasion                        ┆ 86    ┆ 0.2  │
 │ forgery                              ┆ 91    ┆ 0.2  │
 │ ro 99                                ┆ 94    ┆ 0.2  │
-│ 99                                   ┆ 95    ┆ 0.2  │
 │ criminal damage                      ┆ 95    ┆ 0.2  │
+│ 99                                   ┆ 95    ┆ 0.2  │
 │ fight                                ┆ 101   ┆ 0.3  │
+│ .traffic-inf                         ┆ 112   ┆ 0.3  │
 │ .sex crimes                          ┆ 119   ┆ 0.3  │
 │ armed subject                        ┆ 120   ┆ 0.3  │
 │ .welfare check                       ┆ 144   ┆ 0.4  │
@@ -72,23 +100,24 @@ shape: (50, 3)
 │ .vehicle theft                       ┆ 1881  ┆ 4.7  │
 │ .fled                                ┆ 2063  ┆ 5.1  │
 │ .hit/run                             ┆ 2174  ┆ 5.4  │
-│ .stolen                              ┆ 3320  ┆ 8.3  │
+│ .stolen                              ┆ 3334  ┆ 8.3  │
 │                                      ┆ 19861 ┆ 49.5 │
 └──────────────────────────────────────┴───────┴──────┘
 Possibly inappropriate reasons
-shape: (7, 2)
+shape: (8, 2)
 ┌──────────────────────────────────────────────┬───────┐
 │ reason_class                                 ┆ count │
 │ ---                                          ┆ ---   │
 │ str                                          ┆ u32   │
 ╞══════════════════════════════════════════════╪═══════╡
-│ non-crimes                                   ┆ 4     │
-│ other                                        ┆ 38536 │
+│ other                                        ┆ 38493 │
+│ test                                         ┆ 37    │
 │ possibly inequitable, putatively non-violent ┆ 304   │
 │ low-value, non-violent                       ┆ 860   │
-│ underspecified                               ┆ 324   │
-│ unspecified traffic, putatively non-violent  ┆ 69    │
+│ underspecified                               ┆ 287   │
+│ non-crimes                                   ┆ 4     │
 │ myoc                                         ┆ 62    │
+│ unspecified traffic, putatively non-violent  ┆ 112   │
 └──────────────────────────────────────────────┴───────┘
 Officer
 shape: (10, 3)
@@ -135,8 +164,8 @@ shape: (20, 3)
 │ suv           ┆ 92    ┆ 0   │
 │ dodge         ┆ 93    ┆ 0   │
 │ kia           ┆ 94    ┆ 0   │
-│ hyundai       ┆ 104   ┆ 0   │
 │ black         ┆ 104   ┆ 0   │
+│ hyundai       ┆ 104   ┆ 0   │
 │ silver_grey   ┆ 109   ┆ 0   │
 │ arizona       ┆ 118   ┆ 0   │
 │ white suv     ┆ 127   ┆ 0   │
@@ -147,28 +176,28 @@ shape: (20, 3)
 │ null          ┆ 26337 ┆ 66  │
 └───────────────┴───────┴─────┘
 Searches by month
-shape: (15, 4)
-┌──────────────┬───────┬──────────┬────────────┐
-│ search_month ┆ total ┆ has_case ┆ has_reason │
-│ ---          ┆ ---   ┆ ---      ┆ ---        │
-│ struct[2]    ┆ u32   ┆ u32      ┆ u32        │
-╞══════════════╪═══════╪══════════╪════════════╡
-│ {2025,1}     ┆ 3343  ┆ 0        ┆ 821        │
-│ {2025,2}     ┆ 2955  ┆ 237      ┆ 974        │
-│ {2025,3}     ┆ 3744  ┆ 743      ┆ 1354       │
-│ {2025,4}     ┆ 2121  ┆ 429      ┆ 892        │
-│ {2025,5}     ┆ 3569  ┆ 491      ┆ 1345       │
-│ {2025,6}     ┆ 3283  ┆ 506      ┆ 1496       │
-│ {2025,7}     ┆ 3213  ┆ 423      ┆ 981        │
-│ {2025,8}     ┆ 2629  ┆ 544      ┆ 1212       │
-│ {2025,9}     ┆ 2944  ┆ 556      ┆ 1156       │
-│ {2025,10}    ┆ 2093  ┆ 592      ┆ 914        │
-│ {2025,11}    ┆ 2755  ┆ 964      ┆ 1652       │
-│ {2025,12}    ┆ 2480  ┆ 1195     ┆ 1920       │
-│ {2026,1}     ┆ 2210  ┆ 1557     ┆ 2210       │
-│ {2026,2}     ┆ 2818  ┆ 2119     ┆ 2817       │
-│ {2026,3}     ┆ 2     ┆ 2        ┆ 2          │
-└──────────────┴───────┴──────────┴────────────┘
+shape: (15, 8)
+┌──────────────┬───────┬──────────┬────────────────┬────────────────┬─────────────┬───────────┬───────────┐
+│ search_month ┆ total ┆ has_both ┆ reason_no_case ┆ case_no_reason ┆ has_neither ┆ is_lookup ┆ is_search │
+│ ---          ┆ ---   ┆ ---      ┆ ---            ┆ ---            ┆ ---         ┆ ---       ┆ ---       │
+│ struct[2]    ┆ u32   ┆ u32      ┆ u32            ┆ u32            ┆ u32         ┆ u32       ┆ u32       │
+╞══════════════╪═══════╪══════════╪════════════════╪════════════════╪═════════════╪═══════════╪═══════════╡
+│ {2025,1}     ┆ 3343  ┆ 0        ┆ 821            ┆ 0              ┆ 2522        ┆ 0         ┆ 0         │
+│ {2025,2}     ┆ 2955  ┆ 228      ┆ 746            ┆ 8              ┆ 1973        ┆ 0         ┆ 0         │
+│ {2025,3}     ┆ 3744  ┆ 685      ┆ 669            ┆ 51             ┆ 2339        ┆ 0         ┆ 0         │
+│ {2025,4}     ┆ 2121  ┆ 369      ┆ 523            ┆ 59             ┆ 1170        ┆ 0         ┆ 0         │
+│ {2025,5}     ┆ 3569  ┆ 343      ┆ 1002           ┆ 127            ┆ 2097        ┆ 0         ┆ 0         │
+│ {2025,6}     ┆ 3283  ┆ 453      ┆ 1043           ┆ 33             ┆ 1754        ┆ 210       ┆ 3059      │
+│ {2025,7}     ┆ 3213  ┆ 369      ┆ 612            ┆ 52             ┆ 2179        ┆ 1340      ┆ 1833      │
+│ {2025,8}     ┆ 2629  ┆ 452      ┆ 760            ┆ 92             ┆ 1325        ┆ 1885      ┆ 728       │
+│ {2025,9}     ┆ 2944  ┆ 485      ┆ 671            ┆ 70             ┆ 1718        ┆ 2260      ┆ 675       │
+│ {2025,10}    ┆ 2093  ┆ 511      ┆ 403            ┆ 76             ┆ 1103        ┆ 1498      ┆ 581       │
+│ {2025,11}    ┆ 2755  ┆ 883      ┆ 769            ┆ 76             ┆ 1027        ┆ 2244      ┆ 499       │
+│ {2025,12}    ┆ 2480  ┆ 1175     ┆ 745            ┆ 20             ┆ 538         ┆ 1871      ┆ 605       │
+│ {2026,1}     ┆ 2210  ┆ 1521     ┆ 689            ┆ 0              ┆ 0           ┆ 1710      ┆ 498       │
+│ {2026,2}     ┆ 2818  ┆ 2091     ┆ 726            ┆ 1              ┆ 0           ┆ 2176      ┆ 631       │
+│ {2026,3}     ┆ 2     ┆ 2        ┆ 0              ┆ 0              ┆ 0           ┆ 2         ┆ 0         │
+└──────────────┴───────┴──────────┴────────────────┴────────────────┴─────────────┴───────────┴───────────┘
 shape: (35, 4)
 ┌─────────────┬─────────┬────────────────────┬───────┐
 │ search_year ┆ quarter ┆ search_day_of_week ┆ total │

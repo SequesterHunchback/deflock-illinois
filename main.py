@@ -11,6 +11,7 @@ def main(
         consolidated: pathlib.Path = audits_source / "full.parquet",
         fresh: bool = False,
 ) -> None:
+    polars.Config.set_tbl_cols(200)
     polars.Config.set_tbl_rows(200)
     polars.Config.set_tbl_width_chars(200)
     polars.Config.set_fmt_str_lengths(80)
@@ -173,6 +174,18 @@ def altair_plot(
 
 
 def print_most_common(df) -> None:
+    print("Do they have reasons")
+    print(
+        df
+        .select(
+            polars.struct(polars.col("has_reason"), polars.col("has_case")).alias("case_reason"),
+        )
+        ["case_reason"]
+        .value_counts()
+        .with_columns((polars.col("count") / len(df) * 100).round(1).cast(float).alias("%"))
+        .sort(by="count")
+        .tail(50)
+    )
     print("Reasons")
     print(
         df
@@ -252,12 +265,22 @@ def print_most_common(df) -> None:
             polars.struct(
                 polars.col("search_time").dt.year().alias("year"),
                 polars.col("search_time").dt.month().alias("month"),
-            ).alias("search_month")
+            ).alias("search_month"),
+            polars.col("search_type").eq("lookup").alias("is_lookup"),
+            polars.col("search_type").eq("search").alias("is_search"),
+            polars.col("has_reason").and_(polars.col("has_case")).alias("has_both"),
+            polars.col("has_reason").and_(polars.col("has_case").not_()).alias("reason_no_case"),
+            polars.col("has_reason").not_().and_(polars.col("has_case")).alias("case_no_reason"),
+            polars.col("has_reason").not_().and_(polars.col("has_case").not_()).alias("has_neither"),
         ).group_by("search_month")
         .agg(
             polars.len().alias("total"),
-            polars.col("has_case").sum(),
-            polars.col("has_reason").sum(),
+            polars.col("has_both").sum(),
+            polars.col("reason_no_case").sum(),
+            polars.col("case_no_reason").sum(),
+            polars.col("has_neither").sum(),
+            polars.col("is_lookup").sum(),
+            polars.col("is_search").sum(),
         )
         .sort(by="search_month")
     )
@@ -369,7 +392,6 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             "bpd ulta theft",
             "ccso stolen",
             "civil/theft/dus",
-            "larceny/theft offenses - suspect vehicle"
             "larceny/theft offenses - suspect vehicle",
             "larceny/theft offenses - suspect",
             "larceny/theft offenses - theft",
@@ -396,6 +418,11 @@ def persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         ".traffic-inf": {
             "traffic infraction",
             "traffic infraction - 2026-1253",
+            "traffic stop",
+        },
+        ".myoc": {
+            "myoc",
+            "disorderly conduct/disturbance - disorderly myoc",            
         },
         ".burglary": {
             "36898 burg",
@@ -652,14 +679,15 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
             ".traffic-inf",
         },
         "myoc": {
-            "disorderly conduct/disturbance - disorderly myoc",
-            "myoc",
+            ".myoc",
         },
         "underspecified": {
             "unk",
-            "test",
             "sctf",
             "suspicious vehicle",
+        },
+        "test": {
+            "test",
         },
         "possibly inequitable, putatively non-violent": {
             ".drugs",
@@ -674,7 +702,7 @@ def non_persistent_preprocessing(df: polars.DataFrame) -> polars.DataFrame:
         polars.col("search_time").dt.year().alias("search_year"),
         polars.col("search_time").dt.strftime("%b").replace(month_range_map).cast(month_range).alias("quarter"),
         polars.col("search_time").dt.strftime("%a").cast(day_names).alias("search_day_of_week"),
-        polars.col("case").is_not_null().alias("has_case"),
+        polars.coalesce(polars.col("case").str.len_chars().gt(4), polars.lit(False)).alias("has_case"),
         polars.col("reason").str.len_chars().gt(3).alias("has_reason"),
         polars.col("reason").replace_strict(reason_class_inv, default="other").alias("reason_class"),
     )
